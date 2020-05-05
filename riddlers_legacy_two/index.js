@@ -5,7 +5,7 @@ const KeyStorage = require("./logic/key-storage");
 const RiddleHandlers = require("./riddleHandlers/riddle-handlers");
 
 const mainStorage = new KeyStorage("GENERAL");
-mainStorage.register("HOST", "152.96.7.9");
+mainStorage.register("HOST", "152.96.7.10");
 mainStorage.register("PORT", 2224);
 mainStorage.register("RIDDLE_HANDLERS", []);
 
@@ -17,6 +17,7 @@ const setupHandlers = function() {
     riddleHandlers.push(new RiddleHandlers.ReverseRiddleHandler(mainStorage));
     riddleHandlers.push(new RiddleHandlers.RotRiddleHandler(mainStorage));
     riddleHandlers.push(new RiddleHandlers.VigenereRiddleHandler(mainStorage));
+    riddleHandlers.push(new RiddleHandlers.AsciiRiddleHandler(mainStorage));
 };
 
 const connect = async function() {
@@ -39,7 +40,7 @@ const connect = async function() {
         });
         if(!solved) {
             console.log(`UNSOLVED: ${str}`);
-            socket.write("\n");
+            if(!isNaN(actionId))socket.write("\n");
         }
     });
 };

@@ -6,5 +6,6 @@ module.exports = {
     MorseRiddlerHandler: require("./morse-riddle-handler"),
     ReverseRiddleHandler: require("./reverse-riddle-handler"),
     RotRiddleHandler: require("./rot-riddle-handler"),
-    VigenereRiddleHandler: require("./vigenere-riddle-handler")
+    VigenereRiddleHandler: require("./vigenere-riddle-handler"),
+    AsciiRiddleHandler: require("./ascii-riddle-handler")
 };

@@ -24,7 +24,14 @@ class RotRiddleHandler extends IRiddleHandler{
     }
 
     solve(formatting, data, raw) {
-        const toSend = this.doRot(data, 1);
+        let toSend = this.doRot(data, 1);
+
+        if(toSend === 0) {
+            toSend = toSend.toLowerCase();
+        } else if(toSend === 1) {
+            toSend = toSend.toUpperCase();
+        }
+
         this.log(toSend);
         this.storage.get("SOCKET").write(`${toSend}\n`);
         return true;
