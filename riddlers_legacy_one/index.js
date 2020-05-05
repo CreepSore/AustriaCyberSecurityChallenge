@@ -1,7 +1,7 @@
 const net = require("net");
 const fs = require("fs");
 
-const HOST = "152.96.7.16";
+const HOST = "152.96.7.15";
 const PORT = 2223
 
 let connect = async function() {
@@ -17,13 +17,9 @@ let connect = async function() {
 
         if(splitted.length > 1) {
             console.log(str);
-
-            socket.write(flag);
             [...splitted[1]].forEach(c => {
                 let code = c.charCodeAt(0);
-                let iterations = count - old;
-                dir = iterations > 0 ? -1 : 1;
-                for(let i = 0; i < iterations; i++) {
+                for(let i = 0; i < count; i++) {
                     code += dir;
                     if(code < 65) {
                         code = 90;
@@ -34,17 +30,15 @@ let connect = async function() {
                 let str = String.fromCharCode(code);
                 socket.write(str);
             });
-            old += count;
+            socket.write("\n");
         }
         else if(str.includes("GAME")) {
             console.log(str);
         }
         else {
             flag += splitted[0];
-            console.log(`FLAG: ${flag}`);
-            socket.write(flag);
+            console.log(splitted[0]);
         }
-        socket.write("\n");
     });
 };
 
