@@ -61,7 +61,7 @@ After that, we can just use `bash` to escape the rbash shell, and overwrite the 
 /bin/chmod u+w ~/.bashrc && echo -e 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' | tee ~/.bashrc
 ```
 
-After exitting the current>
+After exitting the current shell and entering a new one, you are good to go!
 
 ## Gaining privileges
 ### General Analysis
