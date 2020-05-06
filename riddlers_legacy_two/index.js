@@ -33,15 +33,22 @@ const connect = async function() {
         let actionId = parseInt(splitted[1]);
         let formatting = parseInt(splitted[0]);
 
-        let solved = false;
-        mainStorage.get("RIDDLE_HANDLERS").forEach(riddleHandler => {
-            if(solved || (actionId !== riddleHandler.handlerId && riddleHandler.handlerId !== -1)) return;
-            solved = riddleHandler.solve(formatting, splitted[2], str);
-        });
-        if(!solved) {
-            console.log(`UNSOLVED: ${str}`);
-            if(!isNaN(actionId))socket.write("\n");
+        if(isNaN(actionId)) {
+            console.log(`${str}`);
+            return;
         }
+
+        setTimeout(() => {
+            let solved = false;
+            mainStorage.get("RIDDLE_HANDLERS").forEach(riddleHandler => {
+                if(solved || (actionId !== riddleHandler.handlerId && riddleHandler.handlerId !== -1)) return;
+                solved = riddleHandler.solve(formatting, splitted[2], str);
+            });
+            if(!solved) {
+                console.log(`UNSOLVED: ${str}`);
+                if(!isNaN(actionId))socket.write("\n");
+            }
+        }, 1000);
     });
 };
 

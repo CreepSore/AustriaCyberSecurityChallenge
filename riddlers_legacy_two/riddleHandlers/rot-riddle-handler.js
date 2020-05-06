@@ -6,31 +6,39 @@ class RotRiddleHandler extends IRiddleHandler{
         super(5, "Rot", storage);
     }
 
-    doRot(str, direction = 1) {
-        let result = [];
-        [...str].forEach(c => {
-            let code = c.charCodeAt(0);
-            for(let i = 0; i < count; i++) {
-                code += direction;
-                if(code < 65) {
-                    code = 90;
-                } else if(code > 90) {
-                    code = 65;
-                }
-            }
-            result.push(String.fromCharCode(code));
-        });
-        return result.join("");
-    }
+    doRot(string, n) {
+        const lowercase = "abcdefghijklmnopqrstuvwxyz";
+
+		if (n == null) {
+			n = 13;
+		}
+		n = Number(n);
+		string = String(string);
+		if (n == 0) {
+			return string;
+		}
+		if (n < 0) { // decode instead of encode
+			n += 26;
+		}
+		let length = string.length; // note: no need to account for astral symbols
+		let index = -1;
+		let result = '';
+		let character;
+		let currentPosition;
+		let shiftedPosition;
+		while (++index < length) {
+			character = string.charAt(index).toLowerCase();
+            currentPosition = lowercase.indexOf(character);
+            shiftedPosition = (currentPosition + n) % 26;
+            result += lowercase.charAt(shiftedPosition);
+		}
+		return result;
+	};
 
     solve(formatting, data, raw) {
-        let toSend = this.doRot(data, 1);
-
-        if(toSend === 0) {
-            toSend = toSend.toLowerCase();
-        } else if(toSend === 1) {
-            toSend = toSend.toUpperCase();
-        }
+        const count = parseInt(data.split(":")[0]);
+        const str = data.split(":")[1];
+        let toSend = this.doRot(str.toLowerCase(), count);
 
         this.log(toSend);
         this.storage.get("SOCKET").write(`${toSend}\n`);
