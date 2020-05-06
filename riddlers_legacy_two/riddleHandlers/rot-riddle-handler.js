@@ -3,7 +3,7 @@ const IRiddleHandler = require("./IRiddleHandler");
 
 class RotRiddleHandler extends IRiddleHandler{
     constructor(storage) {
-        super(5, "Rot", storage);
+        super(3, "Rot", storage);
     }
 
     doRot(string, n) {
@@ -38,7 +38,7 @@ class RotRiddleHandler extends IRiddleHandler{
     solve(formatting, data, raw) {
         const count = parseInt(data.split(":")[0]);
         const str = data.split(":")[1];
-        let toSend = this.doRot(str.toLowerCase(), count);
+        let toSend = this.doRot(str.toLowerCase(), -count);
 
         this.log(toSend);
         this.storage.get("SOCKET").write(`${toSend}\n`);
