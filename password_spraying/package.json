@@ -1,0 +1,26 @@
+{
+  "name": "password_spraying",
+  "version": "1.0.0",
+  "description": "Password spraying script for ACSC 2020",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "npm install && node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CreepSore/AustriaCyberSecurityChallenge.git"
+  },
+  "author": "ehdes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CreepSore/AustriaCyberSecurityChallenge/issues"
+  },
+  "homepage": "https://ehdes.com/",
+  "devDependencies": {
+    "eslint": "^7.1.0"
+  },
+  "dependencies": {
+    "http-proxy-agent": "^4.0.1",
+    "node-fetch": "^2.6.0"
+  }
+}
